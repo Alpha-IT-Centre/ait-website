@@ -6,9 +6,17 @@ import lustre/element.{type Element, text}
 import lustre/element/html
 
 pub fn socials() -> Element(Msg) {
-  html.div([class("text-light")], [
-    html.div([class("size-6 text-light")], [logos.facebook("fill-current")]),
-  ])
+  html.div(
+    [
+      class(
+        "text-light bg-dark p-1 flex text-right space-x-2 justify-end max-w-5xl xl:max-w-6xl 2xl:max-w-8xl",
+      ),
+    ],
+    [
+      logos.facebook("fill-current size-8 border border-white"),
+      logos.facebook("fill-current size-8 border border-white"),
+    ],
+  )
 }
 
 pub fn header() -> Element(Msg) {

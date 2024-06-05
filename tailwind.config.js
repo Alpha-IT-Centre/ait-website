@@ -2,6 +2,9 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{gleam,mjs}"],
   theme: {
     extend: {
+      spacing: {
+        '8xl': '88rem',
+      },
       colors: {
         lighter: "#EBEBEB",
         light: "#949494",

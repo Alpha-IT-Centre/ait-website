@@ -850,12 +850,14 @@ function domain_services() {
 // build/dev/javascript/app/app/sections.mjs
 function socials() {
   return div(
-    toList([class$("text-light")]),
     toList([
-      div(
-        toList([class$("size-6 text-light")]),
-        toList([facebook("fill-current")])
+      class$(
+        "text-light bg-dark p-1 flex text-right space-x-2 justify-end max-w-5xl xl:max-w-6xl 2xl:max-w-8xl"
       )
+    ]),
+    toList([
+      facebook("fill-current size-8 border border-white"),
+      facebook("fill-current size-8 border border-white")
     ])
   );
 }

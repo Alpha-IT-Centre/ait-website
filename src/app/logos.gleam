@@ -1,11 +1,11 @@
-import lustre/attribute.{attribute}
+import lustre/attribute.{attribute, class}
 import lustre/element.{element}
 import lustre/element/html
 
 pub fn facebook(classes: String) {
   html.svg(
     [
-      attribute.class(classes),
+      class(classes),
       attribute("viewBox", "0 0 448 512"),
       attribute("xmlns", "http://www.w3.org/2000/svg"),
     ],
