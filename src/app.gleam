@@ -65,6 +65,12 @@ fn view(_: Model) -> Element(Msg) {
     sections.header(),
     sections.menu(),
     sections.carousel(),
+    sections.contact_form(),
     sections.info(),
+    sections.about_us(),
+    sections.domain_search(),
+    sections.reviews(),
+    sections.footer(),
+    sections.copyright(),
   ])
 }

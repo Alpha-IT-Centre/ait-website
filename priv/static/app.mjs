@@ -299,6 +299,9 @@ function element(tag, attrs, children) {
     return new Element("", "", tag, attrs, children, false, false);
   }
 }
+function namespaced(namespace, tag, attrs, children) {
+  return new Element("", namespace, tag, attrs, children, false, false);
+}
 function text(content) {
   return new Text(content);
 }
@@ -762,6 +765,9 @@ function start3(app, selector, flags) {
 function div(attrs, children) {
   return element("div", attrs, children);
 }
+function svg(attrs, children) {
+  return namespaced("http://www.w3.org/2000/svg", "svg", attrs, children);
+}
 
 // build/dev/javascript/app/app.ffi.mjs
 function read_localstorage(key) {
@@ -770,6 +776,29 @@ function read_localstorage(key) {
 }
 function write_localstorage(key, value) {
   window.localStorage.setItem(key, value);
+}
+
+// build/dev/javascript/app/app/logos.mjs
+function facebook(classes) {
+  return svg(
+    toList([
+      class$(classes),
+      attribute("viewBox", "0 0 448 512"),
+      attribute("xmlns", "http://www.w3.org/2000/svg")
+    ]),
+    toList([
+      element(
+        "path",
+        toList([
+          attribute(
+            "d",
+            "M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64h98.2V334.2H109.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H255V480H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"
+          )
+        ]),
+        toList([])
+      )
+    ])
+  );
 }
 
 // build/dev/javascript/app/app/types.mjs
@@ -801,23 +830,34 @@ function bus_support() {
 }
 function hosting() {
   return div(
-    toList([class$("bg-light")]),
+    toList([class$("bg-lighter")]),
     toList([text("hosting services")])
   );
 }
 function data_centre() {
-  return div(toList([class$("bg-light")]), toList([text("data centre")]));
+  return div(
+    toList([class$("bg-lighter")]),
+    toList([text("data centre")])
+  );
 }
 function domain_services() {
   return div(
-    toList([class$("bg-light")]),
+    toList([class$("bg-lighter")]),
     toList([text("domain services")])
   );
 }
 
 // build/dev/javascript/app/app/sections.mjs
 function socials() {
-  return div(toList([]), toList([text("socials")]));
+  return div(
+    toList([class$("text-light")]),
+    toList([
+      div(
+        toList([class$("size-6 text-light")]),
+        toList([facebook("fill-current")])
+      )
+    ])
+  );
 }
 function header() {
   return div(toList([class$("bg-white")]), toList([text("header")]));
@@ -828,9 +868,15 @@ function menu() {
 function carousel() {
   return div(toList([]), toList([text("carousel")]));
 }
+function contact_form() {
+  return div(
+    toList([class$("bg-darker")]),
+    toList([text("contact form")])
+  );
+}
 function info() {
   return div(
-    toList([]),
+    toList([class$("bg-white grid gap-2 md:grid-cols-2 p-2")]),
     toList([
       bus_support(),
       domain_services(),
@@ -838,6 +884,24 @@ function info() {
       data_centre()
     ])
   );
+}
+function about_us() {
+  return div(toList([class$("bg-darker")]), toList([text("about us")]));
+}
+function domain_search() {
+  return div(
+    toList([class$("bg-brand")]),
+    toList([text("domain search")])
+  );
+}
+function reviews() {
+  return div(toList([class$("bg-white")]), toList([text("reviews")]));
+}
+function footer() {
+  return div(toList([class$("bg-dark")]), toList([text("footer")]));
+}
+function copyright() {
+  return div(toList([class$("bg-mid")]), toList([text("copyright")]));
 }
 
 // build/dev/javascript/app/app.mjs
@@ -877,7 +941,13 @@ function view(_) {
       header(),
       menu(),
       carousel(),
-      info()
+      contact_form(),
+      info(),
+      about_us(),
+      domain_search(),
+      reviews(),
+      footer(),
+      copyright()
     ])
   );
 }

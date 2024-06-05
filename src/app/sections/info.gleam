@@ -8,13 +8,13 @@ pub fn bus_support() -> Element(Msg) {
 }
 
 pub fn hosting() -> Element(Msg) {
-  html.div([class("bg-light")], [text("hosting services")])
+  html.div([class("bg-lighter")], [text("hosting services")])
 }
 
 pub fn data_centre() -> Element(Msg) {
-  html.div([class("bg-light")], [text("data centre")])
+  html.div([class("bg-lighter")], [text("data centre")])
 }
 
 pub fn domain_services() -> Element(Msg) {
-  html.div([class("bg-light")], [text("domain services")])
+  html.div([class("bg-lighter")], [text("domain services")])
 }
