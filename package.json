@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dev": "concurrently \"npm:watch\" \"vite\"",
+    "watch": "node watcher.mjs",
+    "build": "sh build.sh"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "concurrently": "^8.2.2",
+    "vite": "^5.2.12",
+    "vite-plugin-copy": "^0.1.6",
+    "vite-plugin-minify": "^1.5.2"
+  }
+}

@@ -12,10 +12,7 @@ pub fn socials() -> Element(Msg) {
         "text-light bg-dark p-1 flex text-right space-x-2 justify-end max-w-5xl xl:max-w-6xl 2xl:max-w-8xl",
       ),
     ],
-    [
-      logos.facebook("fill-current size-8 border border-white"),
-      logos.facebook("fill-current size-8 border border-white"),
-    ],
+    [logos.facebook("fill-current size-8")],
   )
 }
 
