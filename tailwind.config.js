@@ -11,7 +11,11 @@ module.exports = {
         mid: "#555555",
         dark: "#404042",
         darker: "#252525",
-        brand: "#80699D"
+        brand: "#80699D",
+        "brand-dark": "#422367"
+      },
+      fontFamily: {
+        normal: "MontSerrat"
       }
     },
   },

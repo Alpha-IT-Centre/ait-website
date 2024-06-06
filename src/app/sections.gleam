@@ -9,19 +9,71 @@ pub fn socials() -> Element(Msg) {
   html.div(
     [
       class(
-        "text-light bg-dark p-1 flex text-right space-x-2 justify-end max-w-5xl xl:max-w-6xl 2xl:max-w-8xl",
+        "text-light bg-dark p-1 flex mx-auto text-right space-x-2 justify-end px-4 max-w-3xl lg:max-w-5xl xl:max-w-6xl",
       ),
     ],
-    [logos.facebook("fill-current size-8")],
+    [
+      logos.facebook("fill-current size-6 sm:size-8"),
+      logos.linkedin("fill-current size-6 sm:size-8"),
+      logos.x("fill-current size-6 sm:size-8"),
+    ],
   )
 }
 
 pub fn header() -> Element(Msg) {
-  html.div([class("bg-white")], [text("header")])
+  html.div([class("bg-white py-4")], [
+    html.div(
+      [
+        class(
+          "mx-auto px-4 max-w-3xl lg:max-w-5xl xl:max-w-6xl flex justify-between items-center",
+        ),
+      ],
+      [
+        logos.alpha_it_centre("text-brand fill-current h-16"),
+        html.div([class("flex space-x-1 text-lg")], [
+          html.span([class("uppercase")], [text("Call us today")]),
+          html.span([class("font-bold")], [text("1300 20 55 73")]),
+        ]),
+      ],
+    ),
+  ])
 }
 
 pub fn menu() -> Element(Msg) {
-  html.div([class("bg-brand")], [text("menu")])
+  html.div([class("bg-brand")], [
+    html.div(
+      [
+        class(
+          "bg-brand font-normal text-white font-light tracking-tight mx-auto px-4 max-w-3xl lg:max-w-5xl xl:max-w-6xl",
+        ),
+      ],
+      [
+        html.ul([class("flex justify-between items-center")], [
+          menu_item("Home", "#", ""),
+          menu_item("Telephone", "#", ""),
+          menu_item("Business support", "#", ""),
+          menu_item("Hosting services", "#", ""),
+          menu_item("Domain services", "#", ""),
+          menu_item("Datacentre services", "#", ""),
+          menu_item("Contact us", "#", ""),
+        ]),
+      ],
+    ),
+  ])
+}
+
+fn menu_item(name: String, link: String, classes: String) {
+  html.li([class("flex " <> classes)], [
+    html.a(
+      [
+        attribute.href(link),
+        class(
+          "uppercase py-4 px-2 hover:bg-brand-dark transition-all duration-500",
+        ),
+      ],
+      [text(name)],
+    ),
+  ])
 }
 
 pub fn carousel() -> Element(Msg) {
