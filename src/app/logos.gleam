@@ -1,5 +1,4 @@
 import lustre/attribute.{attribute, class}
-import lustre/element.{element}
 import lustre/element/html
 import lustre/element/svg
 
