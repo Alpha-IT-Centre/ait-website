@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "concurrently \"npm:watch\" \"vite\"",
+    "dev": "npm run build && concurrently \"npm:watch\" \"vite\"",
     "watch": "node scripts/watcher.mjs",
     "build": "sh scripts/build.sh && node scripts/update-html-links.mjs"
   },
