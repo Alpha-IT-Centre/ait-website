@@ -264,9 +264,6 @@ function attribute(name, value) {
 function class$(name) {
   return attribute("class", name);
 }
-function id(name) {
-  return attribute("id", name);
-}
 function href(uri) {
   return attribute("href", uri);
 }
@@ -798,9 +795,6 @@ function write_localstorage(key, value) {
 
 // build/dev/javascript/lustre/lustre/element/svg.mjs
 var namespace = "http://www.w3.org/2000/svg";
-function circle(attrs) {
-  return namespaced(namespace, "circle", attrs, toList([]));
-}
 function g(attrs, children) {
   return namespaced(namespace, "g", attrs, children);
 }
@@ -825,6 +819,25 @@ function facebook(classes) {
           attribute(
             "d",
             "M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64h98.2V334.2H109.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H255V480H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"
+          )
+        ])
+      )
+    ])
+  );
+}
+function hamburger(classes) {
+  return svg(
+    toList([
+      class$(classes),
+      attribute("viewBox", "0 0 448 512"),
+      attribute("xmlns", "http://www.w3.org/2000/svg")
+    ]),
+    toList([
+      path(
+        toList([
+          attribute(
+            "d",
+            "M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
           )
         ])
       )
@@ -864,61 +877,6 @@ function x(classes) {
             "d",
             "M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"
           )
-        ])
-      )
-    ])
-  );
-}
-function testing(classes) {
-  return svg(
-    toList([
-      class$(classes),
-      attribute("xmlns", "http://www.w3.org/2000/svg"),
-      attribute("height", "200"),
-      attribute("width", "200")
-    ]),
-    toList([
-      clip_path(
-        toList([id("clip-path")]),
-        toList([
-          circle(
-            toList([
-              attribute("r", "80"),
-              attribute("cy", "100"),
-              attribute("cx", "100")
-            ])
-          )
-        ])
-      ),
-      g(
-        toList([attribute("clip-path", "url(#clip-path)")]),
-        toList([
-          path(
-            toList([
-              attribute("stroke-width", "5"),
-              attribute("stroke", "red"),
-              attribute("fill", "blue"),
-              attribute("d", "M10 10 H 190 V 190 H 10 Z")
-            ])
-          ),
-          path(
-            toList([
-              attribute("stroke-width", "5"),
-              attribute("stroke", "red"),
-              attribute("fill", "none"),
-              attribute("d", "M10 190 L 190 10")
-            ])
-          )
-        ])
-      ),
-      circle(
-        toList([
-          attribute("stroke-width", "2"),
-          attribute("stroke", "black"),
-          attribute("fill", "none"),
-          attribute("r", "80"),
-          attribute("cy", "100"),
-          attribute("cx", "100")
         ])
       )
     ])
@@ -1055,7 +1013,6 @@ function header() {
           )
         ]),
         toList([
-          testing("fill-current text-brand h-16"),
           alpha_it_centre("text-brand fill-current h-6 sm:h-10 md:h-16"),
           div(
             toList([
@@ -1092,15 +1049,14 @@ function header() {
 }
 function menu_item(name, link, classes) {
   return li(
-    toList([class$("flex " + classes)]),
+    toList([
+      class$(
+        "flex items-center py-4 px-2 hover:bg-brand-dark transition-all duration-500" + classes
+      )
+    ]),
     toList([
       a(
-        toList([
-          href(link),
-          class$(
-            "uppercase py-4 px-2 hover:bg-brand-dark transition-all duration-500"
-          )
-        ]),
+        toList([href(link), class$("uppercase")]),
         toList([name])
       )
     ])
@@ -1118,10 +1074,9 @@ function menu() {
         ]),
         toList([
           ul(
+            toList([class$("flex justify-between tracking-tighter")]),
             toList([
-              class$("flex justify-between items-center tracking-tighter")
-            ]),
-            toList([
+              hamburger("size-5 fill-current"),
               menu_item(text("Home"), "#", ""),
               menu_item(text("Telephone"), "#", ""),
               menu_item(

@@ -29,7 +29,6 @@ pub fn header() -> Element(Msg) {
         ),
       ],
       [
-        logos.testing("fill-current text-brand h-16"),
         logos.alpha_it_centre("text-brand fill-current h-6 sm:h-10 md:h-16"),
         html.div(
           [
@@ -61,7 +60,8 @@ pub fn menu() -> Element(Msg) {
         ),
       ],
       [
-        html.ul([class("flex justify-between items-center tracking-tighter")], [
+        html.ul([class("flex justify-between tracking-tighter")], [
+          logos.hamburger("size-5 fill-current"),
           menu_item(text("Home"), "#", ""),
           menu_item(text("Telephone"), "#", ""),
           menu_item(
@@ -111,17 +111,15 @@ pub fn menu() -> Element(Msg) {
 }
 
 fn menu_item(name: Element(Msg), link: String, classes: String) {
-  html.li([class("flex " <> classes)], [
-    html.a(
-      [
-        attribute.href(link),
-        class(
-          "uppercase py-4 px-2 hover:bg-brand-dark transition-all duration-500",
-        ),
-      ],
-      [name],
-    ),
-  ])
+  html.li(
+    [
+      class(
+        "flex items-center py-4 px-2 hover:bg-brand-dark transition-all duration-500"
+        <> classes,
+      ),
+    ],
+    [html.a([attribute.href(link), class("uppercase")], [name])],
+  )
 }
 
 pub fn carousel() -> Element(Msg) {
