@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        '8xl': '88rem',
+        "8xl": "88rem",
       },
       colors: {
         lighter: "#EBEBEB",
@@ -12,11 +12,14 @@ module.exports = {
         dark: "#404042",
         darker: "#252525",
         brand: "#80699D",
-        "brand-dark": "#422367"
+        "brand-dark": "#422367",
       },
       fontFamily: {
-        normal: "MontSerrat"
-      }
+        normal: "MontSerrat",
+      },
+      fontSize: {
+        "2xs": "0.5rem",
+      },
     },
   },
   plugins: [],

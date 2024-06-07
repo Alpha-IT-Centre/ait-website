@@ -56,6 +56,48 @@ pub fn x(classes: String) {
   )
 }
 
+pub fn testing(classes: String) {
+  html.svg(
+    [
+      class(classes),
+      attribute("xmlns", "http://www.w3.org/2000/svg"),
+      attribute("height", "200"),
+      attribute("width", "200"),
+    ],
+    [
+      svg.clip_path([attribute.id("clip-path")], [
+        svg.circle([
+          attribute("r", "80"),
+          attribute("cy", "100"),
+          attribute("cx", "100"),
+        ]),
+      ]),
+      svg.g([attribute("clip-path", "url(#clip-path)")], [
+        svg.path([
+          attribute("stroke-width", "5"),
+          attribute("stroke", "red"),
+          attribute("fill", "blue"),
+          attribute("d", "M10 10 H 190 V 190 H 10 Z"),
+        ]),
+        svg.path([
+          attribute("stroke-width", "5"),
+          attribute("stroke", "red"),
+          attribute("fill", "none"),
+          attribute("d", "M10 190 L 190 10"),
+        ]),
+      ]),
+      svg.circle([
+        attribute("stroke-width", "2"),
+        attribute("stroke", "black"),
+        attribute("fill", "none"),
+        attribute("r", "80"),
+        attribute("cy", "100"),
+        attribute("cx", "100"),
+      ]),
+    ],
+  )
+}
+
 pub fn alpha_it_centre(classes: String) {
   html.svg(
     [

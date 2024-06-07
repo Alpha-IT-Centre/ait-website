@@ -264,6 +264,9 @@ function attribute(name, value) {
 function class$(name) {
   return attribute("class", name);
 }
+function id(name) {
+  return attribute("id", name);
+}
 function href(uri) {
   return attribute("href", uri);
 }
@@ -795,6 +798,9 @@ function write_localstorage(key, value) {
 
 // build/dev/javascript/lustre/lustre/element/svg.mjs
 var namespace = "http://www.w3.org/2000/svg";
+function circle(attrs) {
+  return namespaced(namespace, "circle", attrs, toList([]));
+}
 function g(attrs, children) {
   return namespaced(namespace, "g", attrs, children);
 }
@@ -858,6 +864,61 @@ function x(classes) {
             "d",
             "M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"
           )
+        ])
+      )
+    ])
+  );
+}
+function testing(classes) {
+  return svg(
+    toList([
+      class$(classes),
+      attribute("xmlns", "http://www.w3.org/2000/svg"),
+      attribute("height", "200"),
+      attribute("width", "200")
+    ]),
+    toList([
+      clip_path(
+        toList([id("clip-path")]),
+        toList([
+          circle(
+            toList([
+              attribute("r", "80"),
+              attribute("cy", "100"),
+              attribute("cx", "100")
+            ])
+          )
+        ])
+      ),
+      g(
+        toList([attribute("clip-path", "url(#clip-path)")]),
+        toList([
+          path(
+            toList([
+              attribute("stroke-width", "5"),
+              attribute("stroke", "red"),
+              attribute("fill", "blue"),
+              attribute("d", "M10 10 H 190 V 190 H 10 Z")
+            ])
+          ),
+          path(
+            toList([
+              attribute("stroke-width", "5"),
+              attribute("stroke", "red"),
+              attribute("fill", "none"),
+              attribute("d", "M10 190 L 190 10")
+            ])
+          )
+        ])
+      ),
+      circle(
+        toList([
+          attribute("stroke-width", "2"),
+          attribute("stroke", "black"),
+          attribute("fill", "none"),
+          attribute("r", "80"),
+          attribute("cy", "100"),
+          attribute("cx", "100")
         ])
       )
     ])
@@ -994,17 +1055,33 @@ function header() {
           )
         ]),
         toList([
-          alpha_it_centre("text-brand fill-current h-16"),
+          testing("fill-current text-brand h-16"),
+          alpha_it_centre("text-brand fill-current h-6 sm:h-10 md:h-16"),
           div(
-            toList([class$("flex space-x-1 text-lg")]),
             toList([
-              span(
-                toList([class$("uppercase")]),
-                toList([text("Call us today")])
+              class$(
+                "flex flex-col sm:flex-row space-x-1 text-sm sm:text-base md:text-lg"
+              )
+            ]),
+            toList([
+              div(
+                toList([class$("uppercase space-x-1")]),
+                toList([
+                  span(toList([]), toList([text("Call")])),
+                  span(
+                    toList([class$("md:inline-block hidden")]),
+                    toList([text("us today")])
+                  )
+                ])
               ),
               span(
                 toList([class$("font-bold")]),
-                toList([text("1300 20 55 73")])
+                toList([
+                  a(
+                    toList([href("tel:1300205573")]),
+                    toList([text("1300 20 55 73")])
+                  )
+                ])
               )
             ])
           )
@@ -1024,7 +1101,7 @@ function menu_item(name, link, classes) {
             "uppercase py-4 px-2 hover:bg-brand-dark transition-all duration-500"
           )
         ]),
-        toList([text(name)])
+        toList([name])
       )
     ])
   );
@@ -1036,20 +1113,87 @@ function menu() {
       div(
         toList([
           class$(
-            "bg-brand font-normal text-white font-light tracking-tight mx-auto px-4 max-w-3xl lg:max-w-5xl xl:max-w-6xl"
+            "hidden md:block bg-brand font-normal text-white font-light tracking-tight mx-auto px-4 max-w-3xl lg:max-w-5xl xl:max-w-6xl"
           )
         ]),
         toList([
           ul(
-            toList([class$("flex justify-between items-center")]),
             toList([
-              menu_item("Home", "#", ""),
-              menu_item("Telephone", "#", ""),
-              menu_item("Business support", "#", ""),
-              menu_item("Hosting services", "#", ""),
-              menu_item("Domain services", "#", ""),
-              menu_item("Datacentre services", "#", ""),
-              menu_item("Contact us", "#", "")
+              class$("flex justify-between items-center tracking-tighter")
+            ]),
+            toList([
+              menu_item(text("Home"), "#", ""),
+              menu_item(text("Telephone"), "#", ""),
+              menu_item(
+                div(
+                  toList([class$("flex space-x-1")]),
+                  toList([
+                    span(
+                      toList([class$("lg:inline-block hidden")]),
+                      toList([text("Business")])
+                    ),
+                    span(toList([]), toList([text("Support")]))
+                  ])
+                ),
+                "#",
+                ""
+              ),
+              menu_item(
+                div(
+                  toList([class$("flex space-x-1")]),
+                  toList([
+                    span(toList([]), toList([text("Hosting")])),
+                    span(
+                      toList([class$("lg:inline-block hidden")]),
+                      toList([text("Services")])
+                    )
+                  ])
+                ),
+                "#",
+                ""
+              ),
+              menu_item(
+                div(
+                  toList([class$("flex space-x-1")]),
+                  toList([
+                    span(toList([]), toList([text("Domain")])),
+                    span(
+                      toList([class$("lg:inline-block hidden")]),
+                      toList([text("Services")])
+                    )
+                  ])
+                ),
+                "#",
+                ""
+              ),
+              menu_item(
+                div(
+                  toList([class$("flex space-x-1")]),
+                  toList([
+                    span(toList([]), toList([text("Datacentre")])),
+                    span(
+                      toList([class$("lg:inline-block hidden")]),
+                      toList([text("Services")])
+                    )
+                  ])
+                ),
+                "#",
+                ""
+              ),
+              menu_item(
+                div(
+                  toList([class$("flex space-x-1")]),
+                  toList([
+                    span(toList([]), toList([text("Contact")])),
+                    span(
+                      toList([class$("lg:inline-block hidden")]),
+                      toList([text("Us")])
+                    )
+                  ])
+                ),
+                "#",
+                ""
+              )
             ])
           )
         ])

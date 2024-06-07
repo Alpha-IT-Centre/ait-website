@@ -29,11 +29,24 @@ pub fn header() -> Element(Msg) {
         ),
       ],
       [
-        logos.alpha_it_centre("text-brand fill-current h-16"),
-        html.div([class("flex space-x-1 text-lg")], [
-          html.span([class("uppercase")], [text("Call us today")]),
-          html.span([class("font-bold")], [text("1300 20 55 73")]),
-        ]),
+        logos.testing("fill-current text-brand h-16"),
+        logos.alpha_it_centre("text-brand fill-current h-6 sm:h-10 md:h-16"),
+        html.div(
+          [
+            class(
+              "flex flex-col sm:flex-row space-x-1 text-sm sm:text-base md:text-lg",
+            ),
+          ],
+          [
+            html.div([class("uppercase space-x-1")], [
+              html.span([], [text("Call")]),
+              html.span([class("md:inline-block hidden")], [text("us today")]),
+            ]),
+            html.span([class("font-bold")], [
+              html.a([attribute.href("tel:1300205573")], [text("1300 20 55 73")]),
+            ]),
+          ],
+        ),
       ],
     ),
   ])
@@ -44,25 +57,60 @@ pub fn menu() -> Element(Msg) {
     html.div(
       [
         class(
-          "bg-brand font-normal text-white font-light tracking-tight mx-auto px-4 max-w-3xl lg:max-w-5xl xl:max-w-6xl",
+          "hidden md:block bg-brand font-normal text-white font-light tracking-tight mx-auto px-4 max-w-3xl lg:max-w-5xl xl:max-w-6xl",
         ),
       ],
       [
-        html.ul([class("flex justify-between items-center")], [
-          menu_item("Home", "#", ""),
-          menu_item("Telephone", "#", ""),
-          menu_item("Business support", "#", ""),
-          menu_item("Hosting services", "#", ""),
-          menu_item("Domain services", "#", ""),
-          menu_item("Datacentre services", "#", ""),
-          menu_item("Contact us", "#", ""),
+        html.ul([class("flex justify-between items-center tracking-tighter")], [
+          menu_item(text("Home"), "#", ""),
+          menu_item(text("Telephone"), "#", ""),
+          menu_item(
+            html.div([class("flex space-x-1")], [
+              html.span([class("lg:inline-block hidden")], [text("Business")]),
+              html.span([], [text("Support")]),
+            ]),
+            "#",
+            "",
+          ),
+          menu_item(
+            html.div([class("flex space-x-1")], [
+              html.span([], [text("Hosting")]),
+              html.span([class("lg:inline-block hidden")], [text("Services")]),
+            ]),
+            "#",
+            "",
+          ),
+          menu_item(
+            html.div([class("flex space-x-1")], [
+              html.span([], [text("Domain")]),
+              html.span([class("lg:inline-block hidden")], [text("Services")]),
+            ]),
+            "#",
+            "",
+          ),
+          menu_item(
+            html.div([class("flex space-x-1")], [
+              html.span([], [text("Datacentre")]),
+              html.span([class("lg:inline-block hidden")], [text("Services")]),
+            ]),
+            "#",
+            "",
+          ),
+          menu_item(
+            html.div([class("flex space-x-1")], [
+              html.span([], [text("Contact")]),
+              html.span([class("lg:inline-block hidden")], [text("Us")]),
+            ]),
+            "#",
+            "",
+          ),
         ]),
       ],
     ),
   ])
 }
 
-fn menu_item(name: String, link: String, classes: String) {
+fn menu_item(name: Element(Msg), link: String, classes: String) {
   html.li([class("flex " <> classes)], [
     html.a(
       [
@@ -71,7 +119,7 @@ fn menu_item(name: String, link: String, classes: String) {
           "uppercase py-4 px-2 hover:bg-brand-dark transition-all duration-500",
         ),
       ],
-      [text(name)],
+      [name],
     ),
   ])
 }
